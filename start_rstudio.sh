@@ -4,7 +4,8 @@ repo=${PWD##*/}
 space=larsvilhuber
 case $USER in
   vilhuber)
-  WORKSPACE=$HOME/Workspace/git
+  #WORKSPACE=$HOME/Workspace/git
+  WORKSPACE=$PWD
   ;;
   codespace)
   WORKSPACE=/workspaces
@@ -31,4 +32,4 @@ docker build . -t $space/$repo
 nohup docker push $space/$repo &
 fi
 
-docker run -e PASSWORD=testing -v $WORKSPACE:/home/rstudio --rm -p 8787:8787 $space/$repo
+docker run -e DISABLE_AUTH=true -v $WORKSPACE:/home/rstudio --rm -p 8787:8787 $space/$repo
